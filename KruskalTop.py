@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Dec  4 20:47:55 2018
+
+Jesus Maximino Hernandez
+CS 2302 Data Structures - Diego Aguirre
+TA - Manoj Saha
+Lab 6 - Option A 
 
 @author: JesusMHernandez
 """
 
-from GraphAL import GraphAL
+#from GraphAL import GraphAL
+from GraphAM import GraphAM
 from collections import deque
 from DSF import DisjointSetForest
 
@@ -15,6 +20,7 @@ def kruskals_alg(gr):
     """
     Implements Kruskals Algorithm on a graph
     """
+    
     if gr.adj_list is None:
         return None
     T = list()
@@ -23,25 +29,43 @@ def kruskals_alg(gr):
         while temp != None:
             T.append([i, temp.item, temp.weight])
             temp = temp.next
-            
-def sort_key(elem):
-    """
-    Function to sort weights
-
-    """
-    return elem[2]
-
-    edges = sorted(edges, key=sort_key)
-    tree = list()
+     
+def kruskals(graph):
     
-    dsf = DisjointSetForest(len(gr.adj_list))
-    for edge in edges:
-        if dsf.find(edge[0]) != dsf.find(edge[1]):
-          dsf.union(edge[0], edge[1])
-          tree.append(edge)
     
-    return tree
+    sorted_edges = list()
+    sorted_edges = sort_edges(graph)
+    T = []
+    
+    #tree = DisjointSetForest(len(graph.adj_matrix))
+    #DSF to check for cycles
+    dsf = DisjointSetForest(len(graph.adj_matrix))
 
+    for src in range(len(graph.adj_matrix)):
+        for dest in range(len(graph.adj_matrix)):
+            if graph.adj_matrix[src][dest] != 0:
+                if dsf.find(src) == dsf.find(dest):
+                    break
+                else:
+                    dsf.union(src, dest)
+                    T.append(graph.adj_matrix[src][dest])
+    return T
+def sort_edges(graph):
+    
+    sorted_edges_list = list()
+    seen_list = list()
+    
+    for i in range(len(graph.adj_matrix)):
+        for j in range(len(graph.adj_matrix)):
+            if graph.adj_matrix[i][j] not in seen_list:
+                if graph.adj_matrix[i][j] != 0:
+                     sorted_edges_list.append(graph.adj_matrix[i][j])
+                     seen_list.append(graph.adj_matrix[j][i])
+                     
+    sorted_edges_list.sort() #edges are sorted 
+    
+    return sorted_edges_list
+    
 def topological_sort(graph):
   """
   Implements topological sort algorithm on a graph object.
@@ -93,4 +117,5 @@ def compute_indegree(graph):
         while temp != None:
             final[temp.item] += 1
             temp = temp.next
+            
     return final
