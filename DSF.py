@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sun Dec  2 16:32:35 2018
+
+Jesus Maximino Hernandez
+CS 2302 Data Structures - Diego Aguirre
+TA - Manoj Saha
+Lab 6 - Option A 
 
 @author: JesusMHernandez
 """
@@ -20,7 +24,7 @@ class DisjointSetForest:
         if self.dsf[a] < 0:
             return a
 
-        self.dsf[a] = self.find(self.dsf[a])
+        #self.dsf[a] = self.find(self.dsf[a])
         return self.dsf[a]
 
     def union(self, a, b):  # <--- union by height
