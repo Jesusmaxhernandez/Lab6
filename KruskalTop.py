@@ -10,7 +10,7 @@ Lab 6 - Option A
 @author: JesusMHernandez
 """
 
-#from GraphAL import GraphAL
+from GraphAL import GraphAL
 from GraphAM import GraphAM
 from collections import deque
 from DSF import DisjointSetForest
@@ -94,7 +94,7 @@ def topological_sort(graph):
     u = queue.popleft()
     sort_result.append(u)
     
-    for adj_vertex in graph.get_adj_vertices(u):
+    for adj_vertex in graph.get_adj_vertices_list(u):
       all_in_degrees[adj_vertex] -= 1
       
       if all_in_degrees[adj_vertex] == 0:
