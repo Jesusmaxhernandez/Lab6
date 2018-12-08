@@ -16,8 +16,8 @@ from GraphAM import GraphAM
 
 
 def main():
-  print("For reults in Kruskal's algorithm, edges are formatted as:")
-  print("[source, dest, weight].")
+
+  print("[source, dest, weight]")
   print()
   # Kruskal Graph 1
   # 0-6-2
